@@ -1,0 +1,59 @@
+on:
+  push:
+      paths:
+      - 'IlpSolverIf/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/**'
+jobs:
+  build:
+    strategy:
+      matrix:
+        container: ['manylinux_2_28_x86_64']
+    runs-on: ubuntu-latest
+    container: quay.io/pypa/${{matrix.container}}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: master
+    - name: make ILPSolverIf
+      run: |
+        rdir=`pwd`
+        mkdir build && cd build
+        rm -rf ${rdir}/${{matrix.container}}
+        cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
+        make -j4
+        make install
+        cd -
+        ls
+    - name: Push libs to git
+      if: matrix.container == 'manylinux_2_28_x86_64'
+      run: |
+        ls
+        git config user.name "srini229"
+        git config user.email "rampras@umn.edu"
+        git add -f ${{matrix.container}}/lib/lib* ${{matrix.container}}/include/*
+        git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
+        git branch
+        git push
+    - name: Push libs to git
+      if: matrix.container == 'manylinux_2_24_x86_64'
+      run: |
+        sleep 30
+        git config user.name "srini229"
+        git config user.email "rampras@umn.edu"
+        git add -f ${{matrix.container}}/lib/lib* ${{matrix.container}}/include/*
+        git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
+        git branch
+        git push
+    - name: Push libs to git
+      if: matrix.container == 'manylinux2014_x86_64'
+      run: |
+        sleep 45
+        git config user.name "srini229"
+        git config user.email "rampras@umn.edu"
+        git config --add safe.directory *
+        git add -f ${{matrix.container}}/lib/lib* ${{matrix.container}}/include/*
+        git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
+        git branch
+        git push
