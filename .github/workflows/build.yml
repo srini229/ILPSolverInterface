@@ -13,7 +13,7 @@ jobs:
     container: quay.io/pypa/${{matrix.container}}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: master
     - name: make ILPSolverIf
