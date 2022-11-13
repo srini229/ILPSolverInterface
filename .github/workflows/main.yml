@@ -25,11 +25,7 @@ jobs:
         make -j4
         make install
         cd -
-        ls
-    - name: Push libs to git
-      if: matrix.container == 'manylinux_2_28_x86_64'
-      run: |
-        ls
+        ls -ltra . ..
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
         git add -f ${{matrix.container}}/lib/lib* ${{matrix.container}}/include/*
