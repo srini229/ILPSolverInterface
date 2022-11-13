@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.14..3.18)
+project(ilp_solver VERSION "1.0")
+
+set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "ON" FORCE)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+option(BUILD_SHARED_LIBS "Use SHARED keyword to mark shared libraries" OFF)
+set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+
+include(FetchContent)
+include(ILPSolverIf/cbc.cmake)
+include(ILPSolverIf/symphony.cmake)
+
+add_subdirectory(ILPSolverIf)
+install(TARGETS ILPSolverIf 
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
