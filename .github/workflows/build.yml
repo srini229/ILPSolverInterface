@@ -45,13 +45,13 @@ jobs:
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
         sleep 30
-        git pull
         git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
         git add -f ${{matrix.container}}/
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
+        git pull
         git push
     - name: Push libs to git
       if: matrix.container == 'manylinux2014_x86_64'
@@ -63,7 +63,6 @@ jobs:
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
         cd -
         sleep 45
-        git pull
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
         git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
@@ -72,4 +71,5 @@ jobs:
         git add -f ${{matrix.container}}/
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
+        git pull
         git push
