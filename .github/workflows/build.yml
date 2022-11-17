@@ -24,9 +24,8 @@ jobs:
         mkdir ${rdir}/${{matrix.container}}
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
         cd -
-        ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
-        git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
+        git config --global --add safe.directory .
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
         git add ${{matrix.container}}
