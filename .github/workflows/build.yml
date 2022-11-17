@@ -19,6 +19,7 @@ jobs:
     - name: make ILPSolverIf
       run: |
         rdir=`pwd`
+        rm -rf build
         mkdir build && cd build
         rm -rf ${rdir}/${{matrix.container}}
         mkdir ${rdir}/${{matrix.container}}
@@ -37,6 +38,7 @@ jobs:
       if: matrix.container == 'manylinux_2_24_x86_64'
       run: |
         rdir=`pwd`
+        rm -rf build
         mkdir build && cd build
         rm -rf ${rdir}/${{matrix.container}}
         mkdir ${rdir}/${{matrix.container}}
@@ -57,9 +59,10 @@ jobs:
       if: matrix.container == 'manylinux2014_x86_64'
       run: |
         rdir=`pwd`
-        mkdir build && cd build
+        rm -rf build
         rm -rf ${rdir}/${{matrix.container}}
         mkdir ${rdir}/${{matrix.container}}
+        mkdir build && cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
         cd -
         sleep 45
