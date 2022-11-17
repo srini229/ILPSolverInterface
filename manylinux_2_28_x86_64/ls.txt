@@ -1,0 +1,23 @@
+..:
+total 12
+drwxr-xr-x 3 1001  121 4096 Nov 17 03:30 .
+drwxr-xr-x 6 1001 root 4096 Nov 17 03:30 ..
+drwxr-xr-x 7 1001  121 4096 Nov 17 03:31 ILPSolverInterface
+
+.:
+total 36
+drwxr-xr-x 3 1001  121 4096 Nov 17 03:30 ..
+-rw-r--r-- 1 root root  370 Nov 17 03:31 README.md
+drwxr-xr-x 2 root root 4096 Nov 17 03:31 ILPSolverIf
+drwxr-xr-x 3 root root 4096 Nov 17 03:31 .github
+drwxr-xr-x 8 root root 4096 Nov 17 03:31 .git
+-rw-r--r-- 1 root root  676 Nov 17 03:31 CMakeLists.txt
+drwxr-xr-x 7 1001  121 4096 Nov 17 03:31 .
+drwxr-xr-x 7 root root 4096 Nov 17 03:31 build
+drwxr-xr-x 2 root root 4096 Nov 17 03:31 manylinux_2_28_x86_64
+
+manylinux_2_28_x86_64:
+total 8
+drwxr-xr-x 7 1001  121 4096 Nov 17 03:31 ..
+-rw-r--r-- 1 root root    0 Nov 17 03:31 ls.txt
+drwxr-xr-x 2 root root 4096 Nov 17 03:31 .
