@@ -21,14 +21,14 @@ jobs:
         rdir=`pwd`
         mkdir build && cd build
         rm -rf ${rdir}/${{matrix.container}}
+        mkdir ${rdir}/${{matrix.container}}
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
-        make -j4
-        make install
         cd -
-        ls -ltra . .. ${{matrix.container}}
+        ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         git status
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
+        git config --add safe.directory *
         git add ${{matrix.container}}
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
