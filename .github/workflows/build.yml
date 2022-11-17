@@ -36,7 +36,6 @@ jobs:
     - name: Push libs to git
       if: matrix.container == 'manylinux_2_24_x86_64'
       run: |
-        sleep 30
         rdir=`pwd`
         mkdir build && cd build
         rm -rf ${rdir}/${{matrix.container}}
@@ -45,6 +44,8 @@ jobs:
         cd -
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
+        sleep 30
+        git pull
         git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
@@ -55,13 +56,14 @@ jobs:
     - name: Push libs to git
       if: matrix.container == 'manylinux2014_x86_64'
       run: |
-        sleep 45
         rdir=`pwd`
         mkdir build && cd build
         rm -rf ${rdir}/${{matrix.container}}
         mkdir ${rdir}/${{matrix.container}}
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
         cd -
+        sleep 45
+        git pull
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
         git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
