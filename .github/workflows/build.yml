@@ -25,10 +25,11 @@ jobs:
         cmake -DCMAKE_INSTALL_PREFIX:PATH=${rdir}/${{matrix.container}} ..
         cd -
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
+        ls -ltra . .. ${{matrix.container}} 
         git status
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
-        git config --add safe.directory *
+        git config --global --add safe.directory ${{matrix.container}}
         git add ${{matrix.container}}
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
