@@ -29,7 +29,7 @@ jobs:
         git status
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
-        git config --global --add safe.directory ${{matrix.container}}
+        git config --global --add safe.directory ..
         git add ${{matrix.container}}
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
