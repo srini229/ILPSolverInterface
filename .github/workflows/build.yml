@@ -26,10 +26,9 @@ jobs:
         cd -
         ls -ltra . .. ${{matrix.container}} > ${{matrix.container}}/ls.txt
         ls -ltra . .. ${{matrix.container}} 
-        git status
+        git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
         git config user.name "srini229"
         git config user.email "rampras@umn.edu"
-        git config --global --add safe.directory /__w/ILPSolverInterface/ILPSolverInterface
         git add ${{matrix.container}}
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
