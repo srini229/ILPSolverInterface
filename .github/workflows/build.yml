@@ -33,6 +33,7 @@ jobs:
         git add -f ${{matrix.container}}/
         git diff --staged --quiet || git commit -m "CI_WORKFLOW_COMMIT - upload libs and includes to ${{matrix.container}} [skip ci]"
         git branch
+        git pull
         git push
     - name: Push libs to git
       if: matrix.container == 'manylinux_2_24_x86_64'
